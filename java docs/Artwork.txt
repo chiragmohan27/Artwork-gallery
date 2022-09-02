@@ -1,0 +1,51 @@
+package com.example.madlab2;
+
+public class Artwork {
+
+        String Aid;
+        String Cname;
+        String price;
+        String Bname;
+
+        public Artwork() {
+            this.Aid = Aid;
+            this.Cname = Cname;
+            this.price = price;
+            this.Bname = Bname;
+
+        }
+
+        public String getId() {
+            return Aid;
+        }
+
+        public void setId(String id) {
+            this.Aid = id;
+        }
+
+        public String getcategoryName() {
+            return Cname;
+        }
+
+        public void setcategoryName(String name) {
+            this.Cname = name;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+
+        public void setprice(String price) {
+            this.price = price;
+        }
+
+        public String getBuyer() {
+            return Bname;
+        }
+
+        public void setBuyer(String buyer) {
+            this.Bname = buyer;
+        }
+    }
+
+

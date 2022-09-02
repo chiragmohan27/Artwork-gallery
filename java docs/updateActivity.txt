@@ -1,0 +1,47 @@
+package com.example.madlab2;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class updateActivity extends AppCompatActivity implements View.OnClickListener {
+    EditText UpdateCname, Updateprice, UpdateBname;
+    Button Updatingbtn;
+    DBHelper db;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_update);
+        UpdateCname = findViewById(R.id.updateCname);
+        Updateprice = findViewById(R.id.Updateprice);
+        UpdateBname = findViewById(R.id.UpdateBname);
+
+        db = new DBHelper(this);
+
+        Updatingbtn = findViewById(R.id.Updatingbtn);
+        Updatingbtn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        try {
+            String Cname = UpdateCname.getText().toString();
+            String price = Updateprice.getText().toString();
+            String Bname = UpdateBname.getText().toString();
+            Artwork artwork = new Artwork();
+            artwork.setcategoryName(Cname);
+            artwork.setprice(price);
+            artwork.setBuyer(Bname);
+            db.updatedata(artwork);
+
+            Toast.makeText(this, "Data Updated", Toast.LENGTH_SHORT).show();
+        } catch (Exception E) {
+            Toast.makeText(this, "Error in Updating Data", Toast.LENGTH_SHORT).show();
+        }
+    }
+}

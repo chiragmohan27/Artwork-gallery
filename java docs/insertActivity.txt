@@ -1,0 +1,52 @@
+package com.example.madlab2;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class InsertActivity extends AppCompatActivity implements View.OnClickListener {
+    EditText ed1, ed2, ed3, ed4;
+    Button insertionbtn;
+    com.example.madlab2.DBHelper db;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_insert);
+
+        ed1 = findViewById(R.id.Aid);
+        ed2 = findViewById(R.id.Cname);
+        ed3 = findViewById(R.id.price);
+        ed4 = findViewById(R.id.Bname);
+
+        db = new com.example.madlab2.DBHelper(this);
+
+        insertionbtn = findViewById(R.id.insertionbtn);
+        insertionbtn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        try {
+            String id = ed1.getText().toString();
+            String Cname = ed2.getText().toString();
+            String price = ed3.getText().toString();
+            String Bname = ed4.getText().toString();
+            Artwork artwork = new Artwork();
+            artwork.setId(id);
+            artwork.setcategoryName(Cname);
+            artwork.setprice(price);
+            artwork.setBuyer(Bname);
+            db.insertdata(artwork);
+
+            Toast.makeText(this, "Data Inserted", Toast.LENGTH_SHORT).show();
+        } catch (Exception E) {
+
+            Toast.makeText(this, "Error in Entering Data", Toast.LENGTH_SHORT).show();
+        }
+    }
+}

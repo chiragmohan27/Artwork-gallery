@@ -1,0 +1,79 @@
+package com.example.madlab2;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class DBHelper extends SQLiteOpenHelper {
+    public DBHelper(Context context) {
+        super(context, "Artwork.db", null, 1);
+    }
+
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("create table ArtworkDetails(Aid Text primary key, Cname Text,price Text, Bname Text)");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        db.execSQL("drop table if exists ArtworkDetails");
+    }
+
+    public void insertdata(Artwork artwork) {
+        try {
+            SQLiteDatabase database = this.getWritableDatabase();
+            ContentValues cv = new ContentValues();
+            cv.put("Aid", artwork.getId());
+            cv.put("Cname", artwork.getcategoryName());
+            cv.put("price", artwork.getPrice());
+            cv.put("Bname", artwork.getBuyer());
+            database.insert("ArtworkDetails", null, cv);
+        }
+        catch (Exception E){
+
+        }
+    }
+
+    public void updatedata(Artwork artwork) {
+        try{
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("price",artwork.getPrice());
+        cv.put("Bname", artwork.getBuyer());
+
+        Cursor cursor = database.rawQuery("Select * from ArtworkDetails where Cname = ?", new String[]{artwork.getcategoryName()});
+        if (cursor.getCount() > 0) {
+            database.update("ArtworkDetails", cv, "Cname=?", new String[]{artwork.getcategoryName()});
+        }
+        }
+        catch (Exception E){
+
+        }
+    }
+
+    public void deletedata(Artwork artwork) {
+        try {
+
+            SQLiteDatabase database = this.getWritableDatabase();
+
+
+            Cursor cursor = database.rawQuery("Select * from ArtworkDetails where Cname = ?", new String[]{artwork.getcategoryName()});
+            if (cursor.getCount() > 0) {
+                database.delete("ArtworkDetails", "Cname=?", new String[]{artwork.getcategoryName()});
+            }
+        }
+        catch (Exception E){
+
+        }
+
+    }
+
+    public Cursor getdata() {
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery("Select * from ArtworkDetails",null);
+        return cursor;
+
+    }
+
+}
