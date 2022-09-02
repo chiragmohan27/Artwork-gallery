@@ -1,0 +1,48 @@
+package com.example.android_miniproject;
+
+public class Patient {
+    String Pid;
+    String PatientName;
+    String PatientPhone;
+    String PatientDisease;
+
+    public Patient() {
+        this.Pid = Pid;
+        this.PatientName = PatientName;
+        this.PatientPhone = PatientPhone;
+        this.PatientDisease = PatientDisease;
+
+    }
+
+    public String getId() {
+        return Pid;
+    }
+
+    public void setId(String id) {
+        this.Pid = id;
+    }
+
+    public String getName() {
+        return PatientName;
+    }
+
+    public void setName(String name) {
+        this.PatientName = name;
+    }
+
+    public String getPatientPhone() {
+        return PatientPhone;
+    }
+
+    public void setPatientPhone(String phone) {
+        this.PatientPhone = phone;
+    }
+
+    public String getDisease() {
+        return PatientDisease;
+    }
+
+    public void setDisease(String disease) {
+        this.PatientDisease = disease;
+    }
+}
